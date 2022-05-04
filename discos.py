@@ -99,7 +99,7 @@ def fazer_pedido_limitado(horaAtual, pedidolimitado = None) -> int: # PEDIDO LIM
 
 # SIMULANDO A HORA ATUAL COM A ATRIBUIÇÃO DA VARIAVEL , RANGE(500) PARA 500 PEDIDOS
 while True:
-    for pedido2 in range(5):
+    for pedido2 in range(0, 500):
         horaAtual = datetime.datetime.now().hour
         simulaHora = (input('Deseja simular a hora atual? (S|N)'))
         if simulaHora == 'S':
@@ -107,15 +107,8 @@ while True:
             pedido2 = fazer_pedido_limitado(horaAtual, pedidolimitado)
             pedidos2.append(pedido2)
             horaAtual = 0
-
-        else:
-            pedido2 = fazer_pedido_limitado(horaAtual)
-            pedidos2.append(pedido2)
-
-
-
-
-
+        if simulaHora == 'N':
+            print('Pedido concluido')
 
 
         def imprimir_recibo2(pedidos: list, total: int, nome: int, artista: int, anoLanc: int, estilo: int):
