@@ -50,4 +50,37 @@ class Connection(Config):
         self.cur.execute(sql, params or ())
         return self.fetchall()
 
-    print('Conexão Efetuada com sucesso')
+
+class Person(Connection):
+    def __init__(self):
+        Connection.__init__(self)
+
+#Criando um insert para inserir cadastro de um cliente
+    def insert(self, *args):
+        try:
+            sql = "INSERT INTO cadastro_cliente (cpf, nomeComp, idade, nascimento, email, telefone) VALUES(%s, %s, %s, %s, %s, %s)"
+            self.execute(sql, args)
+            self.commit()
+        except Exception as e:
+            print("Erro ao inserir", e)
+
+    def delete(self, id):
+        try:
+            sql_s = f"SELECT * FROM cadastro_cliente WHERE id = {id} "
+            if not self.query(sql_s):
+                return "Registro não encontrado para deletar"
+            sql_d = f"DELETE FROM cadastro_cliente WHERE id = {id}"
+            self.execute(sql_d)
+            self.commit()
+            return "Registro deletado"
+        except Exception as e:
+            print("Erro ao deletar", e)
+
+
+
+if __name__ == "__main__":
+    person = Person()
+    person.insert(54900840491, "cris", "23", "rec", "cris@", "81997745544")
+    print('Cadastro efetuado com sucesso')
+    person.delete(4)
+    
