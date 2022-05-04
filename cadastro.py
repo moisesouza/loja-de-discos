@@ -1,5 +1,5 @@
 import datetime
-
+import conexao_db
 
 def cadastro():
     while True:
